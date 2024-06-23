@@ -41,7 +41,17 @@
 <body>
     <h1> Trivia Game </h1>
     <div>
-      <label></label>
+      <label for="NumPlayers">Cantidad de partipantes(min:3 | max: 5):</label>
+      <input type="num" id="NumPlayers" min="3" max="5">
+    </div>
+    <div>
+      <label for="NumQuiz">Número de preguntas correctas: </label>
+      <input type="number" id ="NumQuiz">
+    </div>
+    <div id="ConfigPlayers"></div>
+    <div>
+      <label for="Questions"> Archivo de preguntas</label>
+      <input type="file" id="Questions">
     </div>
 
 
