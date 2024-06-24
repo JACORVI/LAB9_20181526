@@ -54,10 +54,10 @@
       <input type="file" id="Questions">
     </div>
     <button onclick="AsignarTurnos()"> Asignar Turnos</button>
-    <button onclick="IniciarJuego()"> Iniciar </button>
+    <button onclick="IniciarJuego()"> PLAY </button>
     <div class="board" id="board"></div>
-    <button onclick="Iniciar()"> Iniciar </button>
-    <button onclick="Avanzar()"> Avanzar </button>
+    <button onclick="Iniciar()"> Inciar Pregunta </button>
+    <button onclick="Avanzar()"> Saltar Turno </button>
 
 
 <script>
@@ -109,6 +109,24 @@
         };
         reader.readsText(file);
       });
+
+
+      function asignarTurnos(){
+        const NumPlayers = document.getElementById("NumPlayers").value;
+        jugadores= [];
+
+        for(let i = 0 ; i< NumPlayers; i++){
+          const nombre = document.getElementById("nombre${i}").value;
+          const color = document.getElementById("color${i}").value;
+          const imagen = document.getElementById("imagen${i}").files[0];
+          jugadores.push({ nombre, color, imagen, posicion: 0, correcta: 0});
+        }
+        jugadores.sort(() => Math.random() - 0.5);
+
+        const board = document.getElementById("board");
+        
+      }
+
 </script>
 </body>
 </html>
