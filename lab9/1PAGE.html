@@ -65,7 +65,25 @@
       let  questions= [];
       let turno= 0;
 
-      document.
+      document.getElementById("NumPlayers").addEventListener('input', function (){
+        const numParticipantes = this.value;
+        const participantesConfig= document.getElementById("ConfigPlayers");
+        participantesConfig.innerHTML= '';
+        for( let i = 0; i< numParticipantes; i++){
+          const participantesDivs = document.createElement('div');
+          participantesDivs.innerHTML =
+            "<h3>Participante ${i+1}</h3>" +
+            "<label>Nombre:</label>\n" +
+            "<input type=\"text\" id=\"nombre${i}\">\n" +
+            "<label>Color de Fondo:</label>\n" +
+            "<input type=\"color\" id=\"color${i}\">\n" +
+            "<label>Imagen del Personaje:</label>\n" +
+            "<input type=\"file\" id=\"imagen${i}\">"
+          ;
+          participantesConfig.append(participantesDivs);
+        }
+      });
+      document.getElementById().addEventListener()
 </script>
 </body>
 </html>
