@@ -111,22 +111,71 @@
       });
 
 
-      function asignarTurnos(){
-        const NumPlayers = document.getElementById("NumPlayers").value;
-        jugadores= [];
 
-        for(let i = 0 ; i< NumPlayers; i++){
-          const nombre = document.getElementById("nombre${i}").value;
-          const color = document.getElementById("color${i}").value;
-          const imagen = document.getElementById("imagen${i}").files[0];
-          jugadores.push({ nombre, color, imagen, posicion: 0, correcta: 0});
-        }
-        jugadores.sort(() => Math.random() - 0.5);
 
-        const board = document.getElementById("board");
-        
+</script>
+
+<script>
+  function asignarTurnos(){
+    const NumPlayers = document.getElementById("NumPlayers").value;
+    jugadores= [];
+
+    for(let i = 0 ; i< NumPlayers; i++){
+      const nombre = document.getElementById("nombre${i}").value;
+      const color = document.getElementById("color${i}").value;
+      const imagen = document.getElementById("imagen${i}").files[0];
+      jugadores.push({ nombre, color, imagen, posicion: 0, correcta: 0});
+    }
+    jugadores.sort(() => Math.random() - 0.5);
+
+    const board = document.getElementById("board");
+    board.innerHTML = "";
+    for(let i=0; i<5;i++){
+      for(let j=0; j <12; i++){
+        const casilla = document.createElement("div") ;
+        casilla.classlist.add("casilla");
+        tablero.appendChild(casilla);
+      }
+    }
+
+    function stargame(){
+
+      const casillas= document.getElementsByClassName("casilla");
+      jugadores.forEach((participante, index) =>{
+        const  img = document.createElement("img");
+        img.classList.add("personaje");
+        img.src = URL.createObjectURL(participante.imagen);
+        img.style.backgroundColor = participante.color;
+        casillas[ index * 12].appendChild(img);
+      });
+    }
+
+    function starquestion(){
+      const preguntaIndex = Math.floor(Math.random()* preguntas.length);
+      const pregunta = pregunta[preguntaIndex];
+      const opciones = pregunta.opciones.sort(() => Math.random() - 0.5);
+
+      let texto = `${pregunta.texto}\n`;
+      opciones.forEach((opcion,index) =>{
+        texto +=`${index + 1}. ${opcion.texto}\n`;
+      });
+
+      const respuesta = prompt(texto);
+      const  respuestaCorrecta = opciones[respuesta - 1].correcta;
+
+      if(respuestaCorrecta){
+        alert("RESPUESTA CORRECTA");
+        move(true);
+      }else {
+        alert("RESPUESTA INCORRECTA");
+        move(false);
       }
 
+    }
+
+    function move(correcta){}
+
+  }
 </script>
 </body>
 </html>
