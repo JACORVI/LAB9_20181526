@@ -42,7 +42,7 @@
     <h1> Trivia Game </h1>
     <div>
       <label for="NumPlayers">Cantidad de partipantes(min:3 | max: 5):</label>
-      <input type="num" id="NumPlayers" min="3" max="5">
+      <input type="number" id="NumPlayers" min="3" max="5">
     </div>
     <div>
       <label for="NumQuiz">Número de preguntas correctas: </label>
@@ -69,21 +69,46 @@
         const numParticipantes = this.value;
         const participantesConfig= document.getElementById("ConfigPlayers");
         participantesConfig.innerHTML= '';
-        for( let i = 0; i< numParticipantes; i++){
-          const participantesDivs = document.createElement('div');
-          participantesDivs.innerHTML =
-            "<h3>Participante ${i+1}</h3>" +
-            "<label>Nombre:</label>\n" +
-            "<input type=\"text\" id=\"nombre${i}\">\n" +
-            "<label>Color de Fondo:</label>\n" +
-            "<input type=\"color\" id=\"color${i}\">\n" +
-            "<label>Imagen del Personaje:</label>\n" +
-            "<input type=\"file\" id=\"imagen${i}\">"
-          ;
-          participantesConfig.append(participantesDivs);
+        if (numParticipantes>2 && numParticipantes < 6){
+
+          for( let i = 0; i< numParticipantes; i++){
+            const participantesDivs = document.createElement('div');
+            participantesDivs.innerHTML =
+              `<h3>Participante ${i + 1}</h3>` +
+              "<label>Nombre:</label>\n" +
+              "<input type=\"text\" id=\"nombre${i}\">\n" +
+              "<label>Color de Fondo:</label>\n" +
+              "<input type=\"color\" id=\"color${i}\">\n" +
+              "<label>Imagen del Personaje:</label>\n" +
+              "<input type=\"file\" id=\"imagen${i}\">"
+            ;
+            participantesConfig.append(participantesDivs);
+          }
+
         }
+
       });
-      document.getElementById().addEventListener()
+      document.getElementById("Questions").addEventListener("change", function (){
+        const file=this.files[0];
+        const reader = new FileReader();
+        reader.onload = function(){
+          const lines = reader.result.split('\n');
+          for( let i = 0; i < lines.length; i+=4 ){
+            const pregunta = {
+              texto: lines [i],
+              opciones: [
+                { texto: lines[i+1].slice(3) ,correctas: lines[i+1].startsWith('SI')},
+                { texto: lines[i+2].slice(3) ,correctas: lines[i+1].startsWith('SI')},
+                { texto: lines[i+3].slice(3) ,correctas: lines[i+1].startsWith('SI')},
+
+
+              ]
+            };
+            preguntas.push(preguntas);
+          }
+        };
+        reader.readsText(file);
+      });
 </script>
 </body>
 </html>
